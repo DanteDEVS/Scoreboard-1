@@ -18,7 +18,7 @@ use pocketmine\network\mcpe\protocol\RemoveObjectivePacket;
 use pocketmine\network\mcpe\protocol\SetDisplayObjectivePacket;
 use pocketmine\network\mcpe\protocol\SetScorePacket;
 use pocketmine\network\mcpe\protocol\types\ScorePacketEntry;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class ScoreboardAPI {
 
@@ -95,7 +95,7 @@ class ScoreboardAPI {
     public function sendRemoveObjectivePacket() : void {
         $pk = new RemoveObjectivePacket();
         $pk->objectiveName = $this->objectiveName;
-        $this->getPlayer()->dataPacket($pk);
+        $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
     }
 
     public function set() : void {
@@ -124,8 +124,8 @@ class ScoreboardAPI {
         $pk->displaySlot = 'sidebar';
         $pk->criteriaName = 'dummy';
         $pk->sortOrder = 0;
-        $this->getPlayer()->sendDataPacket($pk);
-        $this->getPlayer()->sendDataPacket($batch);
+        $this->getPlayer()->getNetworkSession()->sendDataPacket($pk);
+        $this->getPlayer()->getNetworkSession()->sendDataPacket($batch);
     }
 
     public function setScorePacket(array $lines) : SetScorePacket {

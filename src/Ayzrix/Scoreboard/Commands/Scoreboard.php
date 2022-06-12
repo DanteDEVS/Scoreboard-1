@@ -8,7 +8,7 @@ use Ayzrix\Scoreboard\Main;
 use Ayzrix\Scoreboard\Utils\Utils;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class Scoreboard extends PluginCommand {
 
@@ -24,7 +24,7 @@ class Scoreboard extends PluginCommand {
                 unset(PlayerListener::$scoreboards[$player->getName()]);
                 $player->sendMessage(Utils::getIntoConfig("command_success_hide"));
             } else {
-                $levelName = $player->getLevel()->getFolderName();
+                $levelName = $player->getWorld()->getFolderName();
                 if (Utils::getIntoConfig("per_world") === false) {
                     $scoreboard = PlayerListener::$scoreboards[$player->getName()] = new ScoreboardAPI($player);
                     $scoreboard->setDisplayName(Utils::getIntoConfig("title"));

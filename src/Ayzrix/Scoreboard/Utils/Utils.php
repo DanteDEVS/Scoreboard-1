@@ -38,7 +38,7 @@ use Ayzrix\Scoreboard\Extensions\Skyblock;
 use Ayzrix\Scoreboard\Extensions\VanishV2;
 use Ayzrix\Scoreboard\Extensions\VoteParty;
 use Ayzrix\Scoreboard\Main;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\Server;
 use Respect\Validation\Rules\Date;
 
@@ -59,7 +59,7 @@ class Utils {
      * @return string
      */
     public static function formateString(Player $player, string $string): string {
-        $string = str_replace(["{ping}", "{tps}", "{name}", "{online}", "{max_online}", "{level}", "{x}", "{y}", "{z}", "{ip}", "{port}", "{uid}", "{xuid}", "{health}", "{max_health}", "{food}", "{max_food}", "{gamemode}", "{scale}", "{xplevel}", "{id}", "{meta}", "{count}", "{date}"], [$player->getPing(), Server::getInstance()->getTicksPerSecond(), $player->getName(), count(Server::getInstance()->getOnlinePlayers()), Server::getInstance()->getMaxPlayers(), $player->getLevel()->getFolderName(), round($player->getX()), round($player->getY()), round($player->getZ()), $player->getAddress(), $player->getPort(), $player->getUniqueId(), $player->getXuid(), $player->getHealth(), $player->getMaxHealth(), $player->getFood(), $player->getMaxFood(), $player->getGamemode(), $player->getScale(), $player->getXpLevel(), $player->getInventory()->getItemInHand()->getId(), $player->getInventory()->getItemInHand()->getDamage(), $player->getInventory()->getItemInHand()->getCount(), Date(Utils::getIntoConfig("date_format"))], $string);
+        $string = str_replace(["{ping}", "{tps}", "{name}", "{online}", "{max_online}", "{level}", "{x}", "{y}", "{z}", "{ip}", "{port}", "{uid}", "{xuid}", "{health}", "{max_health}", "{food}", "{max_food}", "{gamemode}", "{scale}", "{xplevel}", "{id}", "{meta}", "{count}", "{date}"], [$player->getPing(), Server::getInstance()->getTicksPerSecond(), $player->getName(), count(Server::getInstance()->getOnlinePlayers()), Server::getInstance()->getMaxPlayers(), $player->getWorld()->getFolderName(), round($player->getPosition()->getX()), round($player->getPosition()->getY()), round($player->getPosition()->getZ()), $player->getAddress(), $player->getPort(), $player->getUniqueId(), $player->getXuid(), $player->getHealth(), $player->getMaxHealth(), $player->getHungerManager()->getFood(), $player->getHungerManager()->getMaxFood(), $player->getGamemode(), $player->getScale(), $player->getXpManager()->getXpLevel(), $player->getInventory()->getItemInHand()->getId(), $player->getInventory()->getItemInHand()->getDamage(), $player->getInventory()->getItemInHand()->getCount(), Date(Utils::getIntoConfig("date_format"))], $string);
         if (Main::$options["PiggyFactions"] === true) $string = str_replace(["{faction_name}", "{faction_rank}", "{faction_power}"], [PiggyFaction::getPlayerFaction($player), PiggyFaction::getPlayerRank($player), PiggyFaction::getFactionPower($player)], $string);
         if (Main::$options["FactionsPro"] === true) $string = str_replace(["{faction_name}", "{faction_power}"], [FactionsPro::getPlayerFaction($player), FactionsPro::getFactionPower($player)], $string);
         if (Main::$options["SimpleFaction"] === true) $string = str_replace(["{faction_name}", "{faction_rank}", "{faction_power}", "{faction_money}"], [SimpleFaction::getPlayerFaction($player), SimpleFaction::getPlayerRank($player), SimpleFaction::getFactionPower($player), SimpleFaction::getFactionMoney($player)], $string);
@@ -77,7 +77,7 @@ class Utils {
         if (Main::$options["KDR"] === true) $string = str_replace(["{kills}", "{deaths}", "{kdr}"], [KDR::getPlayerKills($player), KDR::getPlayerDeaths($player), KDR::getPlayerKDR($player)], $string);
         if (Main::$options["VoteParty"] === true) $string = str_replace(["{votes}", "{maxvotes}"], [VoteParty::getVotes(), VoteParty::getMaxVotes()], $string);
         if (Main::$options["BankUI"] === true) $string = str_replace(["{balance}"], [BankUI::getPlayerBalance($player)], $string);
-        if (Main::$options["RedSkyBlock"] === true) $string = str_replace(["{island_members}", "{island_rank}", "{island_size}", "{island_value}", "{island_locked_status}"], [RedSkyBlock::getIslandMembers($player), RedSkyBlock::getIslandRank($player), RedSkyBlock::getIslandSize($player), RedSkyBlock::getIslandValue($player), RedSkyBlock::getIslandLocked($player)], $string);
+        if (Main::$options["RedSkyBlock"] === true) $string = str_replace(["{island_members}", "{island_rank}", "{island_size}", "{island_value}", "{island_locked_status}"], [RedSky\pocketmine\block\BlockLegacyIds::getIslandMembers($player), RedSky\pocketmine\block\BlockLegacyIds::getIslandRank($player), RedSky\pocketmine\block\BlockLegacyIds::getIslandSize($player), RedSky\pocketmine\block\BlockLegacyIds::getIslandValue($player), RedSky\pocketmine\block\BlockLegacyIds::getIslandLocked($player)], $string);
         if (Main::$options["VanishV2"] === true) $string = str_replace(["{vanish_fake_count}"], [VanishV2::getFakeCount()], $string);
         if (Main::$options["MultiEconomy"] === true) $string = str_replace(MultiEconomy::getAllTags($player)[0], MultiEconomy::getAllTags($player)[1], $string);
         if (Main::$options["RankSystem"] === true) $string = str_replace(["{rank}", "{prefix}"], [RankSystem::getPlayerRank($player), RankSystem::getPlayerPrefix($player)], $string);

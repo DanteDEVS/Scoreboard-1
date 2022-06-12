@@ -13,7 +13,7 @@
 
 namespace Ayzrix\Scoreboard\Extensions;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use room17\SkyBlock\island\RankIds;

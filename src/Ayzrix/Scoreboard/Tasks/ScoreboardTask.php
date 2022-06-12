@@ -15,7 +15,7 @@ namespace Ayzrix\Scoreboard\Tasks;
 
 use Ayzrix\Scoreboard\Events\Listener\PlayerListener;
 use Ayzrix\Scoreboard\Utils\Utils;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\Server;
 
@@ -39,7 +39,7 @@ class ScoreboardTask extends Task {
                 }
                 $scoreboard->set();
             } else {
-                $levelName = $player->getLevel()->getFolderName();
+                $levelName = $player->getWorld()->getFolderName();
                 if (isset(Utils::getIntoConfig("worlds")[$levelName])) {
                     $scoreboard->setDisplayName(Utils::getIntoConfig("worlds")[$levelName]["title"]);
                     $i = 0;

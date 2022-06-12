@@ -18,7 +18,7 @@ use Ayzrix\Scoreboard\Utils\Utils;
 use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\Server;
 
 class PlayerListener implements Listener {
@@ -28,7 +28,7 @@ class PlayerListener implements Listener {
 
     public function PlayerJoin (PlayerJoinEvent $event) {
         $player = $event->getPlayer();
-        $levelName = $player->getLevel()->getFolderName();
+        $levelName = $player->getWorld()->getFolderName();
         if (Utils::getIntoConfig("per_world") === false) {
             $scoreboard = self::$scoreboards[$player->getName()] = new ScoreboardAPI($player);
             $scoreboard->setDisplayName(Utils::getIntoConfig("title"));
@@ -56,7 +56,7 @@ class PlayerListener implements Listener {
         }
     }
 
-    public function PlayerLevelChange(EntityLevelChangeEvent $event) {
+    public function PlayerLevelChange(EntityWorldChangeEvent $event) {
         $player = $event->getEntity();
         $levelName = $event->getTarget()->getFolderName();
         if ($player instanceof Player) {

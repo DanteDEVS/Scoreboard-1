@@ -14,7 +14,7 @@
 namespace Ayzrix\Scoreboard\Extensions;
 
 use DaPigGuy\PiggyFactions\players\PlayerManager;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class PiggyFaction {
 

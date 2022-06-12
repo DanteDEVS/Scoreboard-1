@@ -27,7 +27,7 @@ class Main extends PluginBase {
     /** @var array $options */
     public static $options = [];
 
-    public function onEnable(){
+    protected function onEnable(): void{
         $this->saveDefaultConfig();
         self::$instance = $this;
         $this->getServer()->getPluginManager()->registerEvents(new PlayerListener(), $this);

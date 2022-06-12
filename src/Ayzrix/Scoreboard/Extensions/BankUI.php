@@ -14,7 +14,7 @@
 namespace Ayzrix\Scoreboard\Extensions;
 
 use Ayzrix\Scoreboard\Utils\Utils;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
 use pocketmine\utils\Config;

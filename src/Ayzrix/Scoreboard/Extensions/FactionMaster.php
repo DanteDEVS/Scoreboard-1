@@ -13,7 +13,7 @@
 
 namespace Ayzrix\Scoreboard\Extensions;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use ShockedPlot7560\FactionMaster\API\MainAPI;
 use ShockedPlot7560\FactionMaster\Database\Entity\FactionEntity;
 use ShockedPlot7560\FactionMaster\Database\Entity\UserEntity;
@@ -69,7 +69,7 @@ class FactionMaster {
      * @param Player $player
      * @return int
      */
-    public static function getFactionLevel(Player $player): int {
+    public static function getFactionWorld(Player $player): int {
         $faction = MainAPI::getFactionOfPlayer($player->getName());
         if ($faction instanceof FactionEntity) {
             return $faction->level;

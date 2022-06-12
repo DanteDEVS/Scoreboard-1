@@ -14,7 +14,7 @@
 namespace Ayzrix\Scoreboard\Extensions;
 
 use Ayzrix\SimpleFaction\API\FactionsAPI;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class SimpleFaction {
 

@@ -14,7 +14,7 @@
 namespace Ayzrix\Scoreboard\Extensions;
 
 use IvanCraft623\RankSystem\session\SessionManager;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class RankSystem {
 
